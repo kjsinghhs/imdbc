@@ -8,7 +8,10 @@
 				<section class="trailer">
 					<h3>Trailer</h3>
 					<div class="trailer_frame">
-						<iframe width="560" height="315" src="https://www.youtube.com/embed/x73-573aWfs" frameborder="0" allowfullscreen></iframe>
+						{% for link in links %}
+							<iframe width="560" height="315" src="{{link.link}}" frameborder="0" allowfullscreen></iframe>	
+						{% endfor %}
+
 					</div>
 				</section>
 
@@ -28,17 +31,11 @@
 				</section>
 				<section class="links">
 					<h3>Links</h3>
-					<ul class="dlinks">
-						<li><a>Download</a></li>
-						<li><a href="#">Link1</a></li>
-						<li><a href="#">Link2</a></li>
-						<li><a href="#">Link3</a></li>
-					</ul>
 					<ul class="wlinks">
 						<li><a>Watch</a></li>
-						<li><a href="#">Link1</a></li>
-						<li><a href="#">Link2</a></li>
-						<li><a href="#">Link3</a></li>
+						{% for link in links %}
+							<li><a href="{{link.link}}">Link {{forloop.counter}}</a></li>
+						{% endfor %}
 					</ul>
 				</section>
 

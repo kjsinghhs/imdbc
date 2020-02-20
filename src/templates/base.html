@@ -30,13 +30,13 @@
 			<figure class="logo"><a href="/"><img src=" {% static 'img/logo.png' %} " alt="Logo"></figure></a>
 			<nav class="menu">
 				<ul>
-					<li><a href="index.html">Home</a></li>
+					<li><a href="/">Home</a></li>
 					<li><a>Genres</a>
 						<ul>
-							<li><a href="genre.html">Action</a></li>
-							<li><a href="genre.html">Comedy</a></li>
-							<li><a href="genre.html">Drama</a></li>
-							<li><a href="genre.html">Romance</a></li>
+							<li><a href="{% url 'movies:movie_category' 'action' %}">Action</a></li>
+							<li><a href="{% url 'movies:movie_category' 'comedy' %}">Comedy</a></li>
+							<li><a href="{% url 'movies:movie_category' 'drama' %}">Drama</a></li>
+							<li><a href="{% url 'movies:movie_category' 'romance' %}">Romance</a></li>
 						</ul>
 					</li>
 					<li><a>Year</a>
@@ -47,13 +47,13 @@
 							<li><a href="year.html">2014</a></li>
 						</ul>
 					</li>
-					<li><a>Language</a>
+					{% comment %} <li><a>Language</a>
 						<ul>
 							<li><a href="language.html">English</a></li>
 							<li><a href="language.html">German</a></li>
 						</ul>
-					</li>
-					<li><a href="mostwatched.html">Most Watched</a></li>
+					</li> {% endcomment %}
+					{% comment %} <li><a href="mostwatched.html">Most Watched</a></li> {% endcomment %}
 					<li class="mobsearch">
 						<form class="mobform">
 							<input type="text" name="s" class="mobsearchfield" placeholder="Search...">
@@ -70,7 +70,7 @@
 			<div class="toggle"><img src="img/menu.svg"></div>
 		</header>
 		<!-- Swiper -->
-		<div class="homeslider">
+		{% comment %} <div class="homeslider">
 			<div class="swiper-container">
 
 				<div class="swiper-wrapper">
@@ -108,7 +108,7 @@
 				<!-- Add Pagination -->
 				<div class="swiper-pagination"></div>
 			</div>
-		</div>
+		</div> {% endcomment %}
 
 		{% block body %}
 

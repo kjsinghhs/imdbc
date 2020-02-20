@@ -4,17 +4,17 @@ import datetime
 # Create your models here.
 
 CATEGORY_CHOICES = {
-    ('A','ACTION'),
-    ('D','DRAMA'),
-    ('C','COMEDY'),
-    ('R','ROMANCE'),
+    ('action','ACTION'),
+    ('drama','DRAMA'),
+    ('comedy','COMEDY'),
+    ('romance','ROMANCE'),
 }
 
 class Movie(models.Model):
     title = models.CharField(max_length = 200)
     description = models.TextField(max_length = 2000)
     image = models.ImageField(upload_to = 'movie')
-    category = models.CharField(choices = CATEGORY_CHOICES,max_length = 1)
+    category = models.CharField(choices = CATEGORY_CHOICES,max_length = 10)
     # language = models.CharField(choices = LANGUAG)
     cast = models.CharField(max_length=100)
     year_of_production =  models.DateField()
