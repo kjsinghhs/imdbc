@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.views.generic import ListView, DetailView
+from django.views.generic.dates import YearArchiveView
 from .models import Movie , Watch_Links , Commments
 
 
@@ -45,6 +46,24 @@ class MovieCategory(ListView):
         context['movie_category'] = self.category
         return context
     
-    
-        
+
+class MovieSearch(ListView):
+    model = Movie
+    paginate_by =  1
+
+    def get_queryset(self):
+        query = self.request.GET.get('query')
+        if query:
+            object_list = self.model.objects.filter(title__icontains = query)
+            # print(query)
+            # print(object_list)
+        else:
+            object_list = self.model.objects.none()
+
+        return object_list
+
+class MovieYear(YearArchiveView):
+    queryset = Movie.objects.all()
+    date_field =  'year_of_production'
+    print(queryset)    
         
