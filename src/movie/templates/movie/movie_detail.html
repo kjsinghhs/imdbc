@@ -9,7 +9,7 @@
 					<h3>Trailer</h3>
 					<div class="trailer_frame">
 						{% for link in links %}
-							<iframe width="560" height="315" src="{{link.link}}" frameborder="0" allowfullscreen></iframe>	
+							<iframe width="560" height="315" src="{{object.movie_trailer}}" frameborder="0" allowfullscreen></iframe>	
 						{% endfor %}
 
 					</div>
@@ -20,9 +20,15 @@
 					<ul>
 						<li>{{object}}</li>
 						<li>{{object.description}}</li>
-						<li><a href="genre.html">Adventure</a>, <a href="genre.html">Drama</a>, <a href="genre.html">Romance</a></li>
+						
+						{% if object.category %}
+						<li><a href="">{{object.category.title}}</a></li>
+						{% else  %}
+						<li> Cateory Not Updated</li>
+						{% endif %}
+
 						{% if object.cast %}
-						<li><a href="">{{object.cast}}</a></li>
+						<li><a href="">{{object.cast.title}}</a></li>
 						{% else %}
 						<li>Cast Not Updated</li>
 						{% endif %}

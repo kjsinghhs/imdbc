@@ -8,7 +8,7 @@ from .models import Movie , Watch_Links , Commments
 
 class MovieList(ListView):
     model = Movie
-    paginate_by = 1
+    paginate_by = 2
     # template_name = ".html"
 
 
@@ -34,7 +34,7 @@ class MovieDetail(DetailView):
 
 class MovieCategory(ListView):
     model = Movie
-    paginate_by = 1
+    paginate_by = 2
 
     def get_queryset(self):
         self.category = self.kwargs['category']
@@ -65,5 +65,7 @@ class MovieSearch(ListView):
 class MovieYear(YearArchiveView):
     queryset = Movie.objects.all()
     date_field =  'year_of_production'
+    make_object_list = True
+    allow_future = True
     print(queryset)    
         

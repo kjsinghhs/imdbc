@@ -1,5 +1,6 @@
 from django.db import models
 import datetime
+from django.utils.text import slugify
 
 # Create your models here.
 
@@ -19,7 +20,14 @@ class Movie(models.Model):
     cast = models.CharField(max_length=100)
     year_of_production =  models.DateField()
     views_count = models.IntegerField(default = 0)
+    slug = models.SlugField(blank = True , null=True)
+    movie_trailer = models.URLField()
 
+    #Overide the Save method to slugify the movie for better searching.
+    def save(self,*args,**kwargs):
+        if not self.slug:
+            self.slug =  slugify(self.title)
+        super(Movie,self).save(*args,**kwargs)
 
     def __str__(self):
         return self.title
