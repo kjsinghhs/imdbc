@@ -1,6 +1,8 @@
 from django.db import models
-import datetime
+import datetime 
 from django.utils.text import slugify
+from django.utils import timezone
+
 
 # Create your models here.
 
@@ -11,17 +13,24 @@ CATEGORY_CHOICES = {
     ('romance','ROMANCE'),
 }
 
+STATUS_CHOICES = {
+    ('tr','Top Rated'),
+    ('ra','Recently Added'),
+    ('mw','Most Watched'),
+}
+
 class Movie(models.Model):
     title = models.CharField(max_length = 200)
     description = models.TextField(max_length = 2000)
     image = models.ImageField(upload_to = 'movie')
     category = models.CharField(choices = CATEGORY_CHOICES,max_length = 10)
-    # language = models.CharField(choices = LANGUAG)
     cast = models.CharField(max_length=100)
     year_of_production =  models.DateField()
     views_count = models.IntegerField(default = 0)
     slug = models.SlugField(blank = True , null=True)
     movie_trailer = models.URLField()
+    created = models.DateTimeField(default = timezone.now, auto_now=False, auto_now_add=False)
+    status = models.CharField(choices = STATUS_CHOICES, max_length=2)
 
     #Overide the Save method to slugify the movie for better searching.
     def save(self,*args,**kwargs):
