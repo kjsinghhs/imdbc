@@ -41,7 +41,7 @@ class Movie(models.Model):
     def __str__(self):
         return self.title
 
-class Watch_Links(models.Model):
+class Watch_Link(models.Model):
     movie = models.ForeignKey(Movie, related_name='movie_watch_link', on_delete=models.CASCADE)
     link = models.URLField(max_length=200)
 
@@ -49,12 +49,16 @@ class Watch_Links(models.Model):
         return str(self.movie)
 
 
-class Commments(models.Model):
+class Comment(models.Model):
     movie = models.ForeignKey(Movie, related_name='movie_comment', on_delete=models.CASCADE)
-    comment = models.CharField(max_length=5000)
+    comment = models.TextField()
+    created_on  = models.DateTimeField(default = timezone.now)
     userid =  models.IntegerField(default = 0)
     username = models.CharField(max_length=100)
-
-    def __str__(self):
-        return str(self.movie)
     
+    def __str__(self):
+        return 'Comment {} by {}'.format(self.comment, self.username)
+
+    # def comment_posted(self):
+    #     comment_movie = self.movie
+    #     comment_data = comment.objects.filter_    

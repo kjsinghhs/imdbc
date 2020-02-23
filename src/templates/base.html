@@ -18,9 +18,6 @@
 
 	<!-- Demo styles -->
 	<style>
-
-
-
 	</style>
 </head>
 <body>
@@ -44,9 +41,7 @@
 							<li><a href="{% url 'movies:movie_year' year=2020 %}">2020</a></li>
 							<li><a href="{% url 'movies:movie_year' year=2019 %}">2019</a></li>
 							<li><a href="{% url 'movies:movie_year' year=2018 %}">2018</a></li>
-							{% comment %} <li><a href="year.html">2016</a></li>
-							<li><a href="year.html">2015</a></li>
-							<li><a href="year.html">2014</a></li> {% endcomment %}
+							
 						</ul>
 					</li>
 					{% comment %} <li><a>Language</a>
@@ -71,47 +66,14 @@
 
 			<div class="toggle"><img src="img/menu.svg"></div>
 		</header>
-		<!-- Swiper -->
-		{% comment %} <div class="homeslider">
-			<div class="swiper-container">
 
-				<div class="swiper-wrapper">
-					<div class="swiper-slide">
-						<img src="images/slider/poster2.jpg">
-						<div class="caption">
-							<div class="captioninside">
-								<h3>Movie Title</h3>
-								<p>Lorem ipsum dolor siamet</p>
-								<a href="single.html" class="playbutton">Play</a>
-							</div>
-						</div>
-					</div>
-					<div class="swiper-slide">
-						<img src="images/slider/poster1.jpg">
-						<div class="caption">
-							<div class="captioninside">
-								<h3>Movie Title 2</h3>
-								<p>Lorem ipsum dolor siamet</p>
-								<a href="single.html" class="playbutton">Play</a>
-							</div>
-						</div>
-					</div>
-					<div class="swiper-slide">
-						<img src="images/slider/poster2.jpg">
-						<div class="caption">
-							<div class="captioninside">
-								<h3>Movie Title 3</h3>
-								<p>Lorem ipsum dolor siamet</p>
-								<a href="single.html" class="playbutton">Play</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- Add Pagination -->
-				<div class="swiper-pagination"></div>
-			</div>
-		</div> {% endcomment %}
+		<div >
 
+
+
+
+		</div>
+	
 		{% block body %}
 
 		{% endblock body %}
