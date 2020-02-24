@@ -77,7 +77,7 @@
 						</section>
 					{% endif %}
 
-					<section class="comments">
+					{% comment %} <section class="comments">
 							<h3>Leave a Comment</h3>
 							<form action="CommentFromDetail" method="post" >
 								{% csrf_token %} 
@@ -94,13 +94,13 @@
 								</section>
 
 								<section style="position: absolute;padding-top: 6.5%;padding-left: 37.8%;">
-									{% comment %} <-- comment_post_ID value hard-coded as 1 --> {% endcomment %}
 									{% csrf_token %}
 									<input type="hidden" name="comment_post_ID" value="1" id="comment_post_ID" />
 									<input name="submit" type="submit" value="Submit comment" />
 								</section>
 							</form>
 					</section> 
+					 {% endcomment %}
 				</section>
 			</div>
 		</main>
