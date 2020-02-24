@@ -25,7 +25,7 @@ class HomeView(ListView):
 #TODO: Creating a MovieListing which is used to show the list of movies based on the headers
 class MovieList(ListView):
     model = Movie
-    paginate_by = 2
+    paginate_by = 4
 
 #TODO: Creating a Movie Details Page to be viewed by the user once a Movie is clicked
 class MovieDetail(DetailView):
@@ -72,7 +72,7 @@ def comment_details(request,slug):
 #TODO: Creating a MovieList view based on the Category.
 class MovieCategory(ListView):
     model = Movie
-    paginate_by = 2
+    paginate_by = 4
 
     def get_queryset(self):
         self.category = self.kwargs['category']
@@ -86,7 +86,7 @@ class MovieCategory(ListView):
 #TODO: Creating a Search bar entries
 class MovieSearch(ListView):
     model = Movie
-    paginate_by =  2
+    paginate_by =  4
 
     def get_queryset(self):
         query = self.request.GET.get('query')
