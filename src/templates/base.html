@@ -77,17 +77,17 @@
 		{% block body %}
 
 		{% endblock body %}
+		
+		{% csrf_token %}
 
 		<footer class="footer">
-			<div class="copyright"><p>Copyright &copy 2017 www.focusoncode.com</p></div>
+			<div class="copyright"><p>Copyright &copy KJS</p></div>
 			<div class="footermenu">
 				<ul>
-					<li><a href="index.html">Home</a></li>
-					<li><a href="contact.html">Contact</a></li>
-					<li><a href="terms.html">Terms and conditions</a></li>
+					<li><a href="/">Home</a></li>
 				</ul>
 			</div>
-			<div class="tags">
+			{% comment %} <div class="tags">
 				<ul>
 					<li>Watch Free Movies Trailers</li>
 					<li>Movie Trailers</li>
@@ -96,7 +96,7 @@
 					<li>New Movies Trailers</li>
 
 				</ul>
-			</div>
+			</div> {% endcomment %}
 
 		</footer>
 

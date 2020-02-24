@@ -61,6 +61,46 @@
 
 				<section class="comments">
 					<h3>Comments</h3>
+					
+					{% if comments %}
+						{% for comment in comments %}
+						<section class = "comments" style="color:white;background-color: #333333;border-radius: 5px;">
+							<ul>
+								<li><p>Name:&nbsp;{{comment.username}}</p></li>
+								<li><p>Comment:   {{comment.comment}}</p></li>
+							</ul>
+						</section>
+						{% endfor %}
+					{% else %}
+						<section class = "comments" style="color:white;background-color: #333333;border-radius: 5px;">
+							<p>No Comment Are Present Yet</p>
+						</section>
+					{% endif %}
+
+					<section class="comments">
+							<h3>Leave a Comment</h3>
+							<form action="CommentFromDetail" method="post" >
+								{% csrf_token %} 
+								<section style="position: absolute;padding-top: 2.5%;padding-left: .8%;"> 
+									{% csrf_token %}
+									<label for="comment_author" class="required" style="color: white">Your name</label>
+									<input type="text" name="comment_author" id="comment_author" value="" tabindex="1" required="required">
+								</section>
+
+								<section style="position: absolute;padding-top: 5.5%;padding-left: .8%;" >
+									{% csrf_token %}
+									<label for="comment" class="required" style="color: white" >Your message</label>
+									<textarea name="comment" id="comment" rows="1" tabindex="10" cols="60" required="required" style="margin: 0px;height: 22px;width: 326px;/* padding-top: 1%; */"></textarea>
+								</section>
+
+								<section style="position: absolute;padding-top: 6.5%;padding-left: 37.8%;">
+									{% comment %} <-- comment_post_ID value hard-coded as 1 --> {% endcomment %}
+									{% csrf_token %}
+									<input type="hidden" name="comment_post_ID" value="1" id="comment_post_ID" />
+									<input name="submit" type="submit" value="Submit comment" />
+								</section>
+							</form>
+					</section> 
 				</section>
 			</div>
 		</main>

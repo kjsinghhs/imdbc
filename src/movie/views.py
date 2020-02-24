@@ -3,7 +3,10 @@ from django.shortcuts import render
 # Create your views here.
 from django.views.generic import ListView, DetailView
 from django.views.generic.dates import YearArchiveView
-from .models import Movie , Watch_Link , Comment
+from .models import Movie , Watch_Link ,Comment
+from .forms import CommentForm
+from django.shortcuts import render, get_object_or_404
+from django import forms
 
 #TODO: Adding the Home view for the website.
 class HomeView(ListView):
@@ -30,6 +33,7 @@ class MovieDetail(DetailView):
 
     def get_object(self):
         object = super(MovieDetail, self).get_object()
+        
         object.views_count += 1
         object.save()
         return object
@@ -39,8 +43,31 @@ class MovieDetail(DetailView):
         context["links"] = Watch_Link.objects.filter(movie=self.get_object())
         context["comments"] = Comment.objects.filter(movie=self.get_object())
         context["related_movies"] = Movie.objects.filter(category=self.get_object().category)#.order_by['created'][0:6]
-        print(context)
         return context
+
+def comment_details(request,slug):
+    template_name = 'movie/comments.html'
+    movie = get_object_or_404(Movie,slug = slug)
+    comment = Movie.comment.all()
+    new_comment = None
+    if request.method == 'POST':
+        comment_form = CommentForm(data=request.POST)
+    if comment_form.is_valid():
+        # Create Comment object but don't save to database yet
+        new_comment = comment_form.save(commit=False)
+        # Assign the current post to the comment
+        new_comment.post = movie
+        # Save the comment to the database
+        new_comment.save()
+    else:
+        comment_form = CommentForm()
+
+    return render(request, template_name, {'post': movie,
+                                            'comments': comment,
+                                            'new_comment': new_comment,
+                                            'comment_form': comment_form})
+
+
 
 #TODO: Creating a MovieList view based on the Category.
 class MovieCategory(ListView):
@@ -77,21 +104,24 @@ class MovieYear(YearArchiveView):
     make_object_list = True
     allow_future = True
 
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('username', 'comment')
 
-#TODO: Creating a comment section for the user.
+    def add_comment_to_post(request, pk):
+        movie_to_comment = get_object_or_404(Movie, title=title)
+        if request.method == "POST":
+            form = CommentForm(request.POST)
+            if form.is_valid():
+                comment = form.save(commit=False)
+                comment.post = post
+                comment.save()
+                return redirect('post_detail', pk=post.pk)
+        else:
+            form = CommentForm()
+        return render(request, 'blog/add_comment_to_post.html', {'form': form})
 
-class MovieComment(ListView):
-    model = Comment
-
-    def get_queryset(self):
-        self.movie = self.kwargs['category']
-        return Movie.objects.filter(category = self.category)
-
-    def get_context_data(self, **kwargs):
-        context = super(MovieCategory,self).get_context_data(**kwargs)
-        context['movie_category'] = self.category
-        return context
-    
 
     
         

@@ -55,10 +55,30 @@ class Comment(models.Model):
     created_on  = models.DateTimeField(default = timezone.now)
     userid =  models.IntegerField(default = 0)
     username = models.CharField(max_length=100)
-    
+    slug = models.SlugField(blank = True , null=True)
+
+    def save(self,*args,**kwargs):
+        if not self.slug:
+            self.slug =  slugify(self.movie)
+        super(Comment,self).save(*args,**kwargs)
+
     def __str__(self):
         return 'Comment {} by {}'.format(self.comment, self.username)
 
     # def comment_posted(self):
     #     comment_movie = self.movie
     #     comment_data = comment.objects.filter_    
+
+# class Comment(models.Model):
+#     post = models.ForeignKey(Movie,on_delete=models.CASCADE,related_name='comments')
+#     name = models.CharField(max_length=80)
+#     email = models.EmailField()
+#     body = models.TextField()
+#     created_on = models.DateTimeField(auto_now_add=True)
+#     # active = models.BooleanField(default=False)
+
+#     class Meta:
+#         ordering = ['created_on']
+
+#     def __str__(self):
+#         return 'Comment {} by {}'.format(self.body, self.name)
