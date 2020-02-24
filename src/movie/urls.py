@@ -12,7 +12,7 @@ urlpatterns = [
     path('year/<int:year>', MovieYear.as_view(),name = 'movie_year'),
     path('<slug:slug>', MovieDetail.as_view(),name = 'movie_detail'),
     path('movies/<slug:slug>', views.comment_details, name='comment_details'),
-    path('movies/CommentForm', views.CommentForm, name='CommentForm'),
+    # path('movies/CommentForm', views.CommentForm, name='CommentForm'),
 ]
 
 
